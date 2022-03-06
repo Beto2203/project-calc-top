@@ -18,7 +18,6 @@ let specials = document.querySelectorAll(".special");
 let operators = document.querySelectorAll(".action");
 
 //Only Defined variables
-let mainLoop;
 
 
 /******************
@@ -59,8 +58,15 @@ function multiply(num1, num2){
 }
 
 function divide(dividend, divisor){
-    globalTotal = (divisor !== 0) ? dividend / divisor : "ERROR: can't divide by zero";
-    display.value = globalTotal;
+    if (divisor === 0){
+        alert("ERROR: can't divide by zero")
+        start()
+    }
+    else{
+        globalTotal = dividend / divisor;
+        display.value = globalTotal;
+    }
+    
 }
 
 function operate(operator, total, numToApply){
@@ -133,27 +139,27 @@ numbers.forEach(number => {
 
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
-        currentOperator = operator.id;
+        dotAlreadyUsed = false;
+        if (currentOperator === "0"){
+            currentOperator = operator.id;
+        }
         if (!operatorActive && globalTotal === ""){
             operatorActive = true;
             globalTotal = globalDisplay;
             globalDisplay = ""
             display.value = globalTotal;
-            console.log("1111111111111");
         }
         else if(!operatorActive){
             operatorActive = true;
             globalDisplay = ""
             display.value = globalTotal;
-            console.log("22222222222222");
         }
         else{
             operate(currentOperator, globalTotal, globalDisplay)
             globalDisplay = ""
             display.value = globalTotal;
-            console.log("3333333333333");
-
         }
+        currentOperator = operator.id
     })
 })
 
@@ -161,8 +167,7 @@ function start(){
     globalDisplay = "";
     globalTotal = "";
     dotAlreadyUsed = false;
-    display.value = "0";
-    mainLoop = true;
+    display.value = "";
     currentOperator = "0";
     finished = false;
 }
