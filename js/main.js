@@ -1,17 +1,29 @@
 /******************
 *****VARIABLES
 ******************/
-let globalTotal = ""
+let globalTotal = "";
+let dotAlreadyUsed = false;
 let display = document.querySelector("#mainResult");
 let del = document.querySelector("#del");
+let dot = document.querySelector("#dot");
+let equal = document.querySelector("#equal");
 let numbers = document.querySelectorAll(".number");
 let specials = document.querySelectorAll(".special");
 let operators = document.querySelectorAll(".action");
 
+
+/******************
+*****ANONYMOUS FUNCTIONS
+******************/
+const displayTheTotal = (node) => {
+    globalTotal += node.textContent;
+    display.value = globalTotal;
+}
+
+
 /******************
 *****FUNCTIONS
 ******************/
-
 function add(num1, num2){
     return num1 + num2;
 }
@@ -47,28 +59,42 @@ function operate(operator, total, numToApply){
 
 
 del.addEventListener("click", () => {
-    
+    if (dotAlreadyUsed && globalTotal.slice(-2,-1) === ".") {
+        dotAlreadyUsed = false;
+        globalTotal = globalTotal.slice(0, -2);
+        console.log("First   " + globalTotal)
+    }
+    else{
+        globalTotal = globalTotal.slice(0, -1);
+        console.log("Second   " + globalTotal);
+    }
+    display.value = globalTotal;
+})
+
+dot.addEventListener("click", () => {
+    dotAlreadyUsed = true;
+    globalTotal += ".";
+    display.value = globalTotal + "0";
+})
+
+equal.addEventListener("click", () => {
+
 })
 
 numbers.forEach(number => {
     number.addEventListener("click", () => {
-        globalTotal += number.textContent;
-        display.value = globalTotal;
+        displayTheTotal(number);
     })
 })
 
-specials.forEach(special => {
-    special.addEventListener("click", () => {
-        if (special.)
-    })
-})
+
 
 function start(){
     globalTotal = "";
-    display.value = globalTotal;
-    
-
+    dotAlreadyUsed = false;
+    display.value = "0";
     
 }
 
+//Calling the main function on page load
 start()

@@ -49,6 +49,7 @@
 }
 #keyboard ul .number,
 #keyboard ul .action,
+#keyboard ul #clear,
 #keyboard ul .special {
   flex: 0.5;
   display: flex;
@@ -129,7 +130,8 @@ input[type=number] {
   border-right: 3px solid black;
 }
 
-.action {
+.action,
+#clear {
   background-color: #8A95A5;
   flex-basis: 100%;
   border: 1.5px solid black;
