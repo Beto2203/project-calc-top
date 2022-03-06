@@ -1,0 +1,126 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/******************************************
+/* VARIABLES
+/*******************************************/
+/******************************************
+/* BASE STYLES
+/*******************************************/
+#keyboard {
+  text-align: center;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+#keyboard {
+  display: flex;
+  width: 70%;
+  height: 500px;
+  font-size: 60px;
+  margin: auto;
+  margin-top: 100px;
+}
+#keyboard ul {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+#keyboard ul .number,
+#keyboard ul .action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#keyboard ul .number {
+  flex-basis: 33%;
+}
+#keyboard ul #zero {
+  flex: 0.332;
+  margin: 0 auto;
+  border: 2px solid black;
+  border-top: 1px solid black;
+}
+#keyboard #actions {
+  flex-direction: column;
+  flex: 0.3;
+  margin-left: 50px;
+}
+
+#display {
+  display: flex;
+  margin-top: 200px;
+  justify-content: center;
+}
+#display #mainResult {
+  flex: 0.7;
+  text-align: center;
+  color: white;
+  font-size: 100px;
+  background-color: #215c6b;
+}
+
+/******************************************
+/* MODULE
+/*******************************************/
+.number {
+  background-color: #ffe7d0;
+  border: 1px solid black;
+}
+
+.topRow {
+  border-top: 2px solid black;
+}
+
+.botRow {
+  border-bottom: 2px solid black;
+}
+
+.leftCol {
+  border-left: 2px solid black;
+}
+
+.rightCol {
+  border-right: 2px solid black;
+}
+
+.action {
+  background-color: #ffe7d0;
+  flex-basis: 100%;
+  border: 1px solid black;
+}
+
+.action:not(.action:first-child) {
+  border-top: none;
+}
+
+li {
+  border-radius: 10px;
+}
+
+/******************************************
+/* STATE
+/*******************************************/
+/******************************************
+/* OTHER STYLES
+/*******************************************/
+
+/*# sourceMappingURL=style.css.map */

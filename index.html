@@ -5,10 +5,10 @@
     	<meta name="description" content="Your description goes here">
     	<meta name="keywords" content="one, two, three">
 
-		<title>Blank Template</title>
+		<title>Project: Calculator</title>
 
 		<!-- external CSS link -->
-		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/reset.css">
 		<!-- This gets created the first time you compile the Sass file -->
 		<link rel="stylesheet" href="css/style.css">
 
@@ -18,6 +18,30 @@
 
 	<body>
 
-		
+		<div id="display">
+			<div id="mainResult">200</div>
+		</div>
+		<div id="keyboard">
+			<ul id="numbers">
+				<li class="number topRow leftCol" id="one"><span>1</span></li>
+				<li class="number topRow" id="two"><span>2</span></li>
+				<li class="number topRow rightCol" id="three"><span>3</span></li>
+				<li class="number leftCol" id="four"><span>4</span></li>
+				<li class="number" id="five"><span>5</span></li>
+				<li class="number rightCol" id="six"><span>6</span></li>
+				<li class="number leftCol botRow" id="seven"><span>7</span></li>
+				<li class="number" id="eight"><span>8</span></li>
+				<li class="number rightCol botRow" id="nine"><span>9</span></li>
+				<li class="number" id="zero"><span>0</span></li>
+			</ul>
+			<ul id="actions">
+				<li class="action" id="clear">AC</li>
+				<li class="action" id="add">+</li>
+				<li class="action" id="sub">-</li>
+				<li class="action" id="mult">*</li>
+				<li class="action" id="divi">÷</li>
+				<li class="action" id="equal">=</li>
+			</ul>
+		</div>
 	</body>
 </html>

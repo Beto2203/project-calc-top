@@ -18,33 +18,113 @@
 }
 
 /******************************************
+/* VARIABLES
+/*******************************************/
+
+$border-color: black;
+$outer-border: 2px solid $border-color;
+$inner-border: 1px solid $border-color;
+
+/******************************************
 /* BASE STYLES
 /*******************************************/
 
-body {
-
+#keyboard{
+    text-align: center;
 }
 
 
 /******************************************
 /* LAYOUT
 /*******************************************/
-header {
+#keyboard{
+    display: flex;
+    width: 70%;
+    height: 500px;
+    font-size: 60px;
+    margin: auto;
+    margin-top: 100px;
+    
+    ul{
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
 
+        .number,
+        .action{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .number{
+            flex-basis: 33%;
+        }
+        #zero{
+            flex: 0.332;
+            margin: 0 auto;
+            border: $outer-border;
+            border-top: $inner-border;
+        }
+    }
+    #actions{
+        flex-direction: column;
+        flex: 0.3;
+        margin-left: 50px;
+    }
 }
 
-footer {
+#display{
+    display: flex;
+    margin-top: 200px;
+    justify-content: center;
 
+    #mainResult{
+        flex: 0.7;
+        text-align: center;
+        color: white;
+        font-size: 100px;
+        background-color: rgb(33, 92, 107);
+    }
 }
+
+
+
 
 /******************************************
 /* MODULE
 /*******************************************/
 
+.number{
+    background-color: rgb(255, 231, 208);
+    border: $inner-border;
+}
 
+.topRow{
+    border-top: $outer-border
+}
+.botRow{
+    border-bottom: $outer-border;
+}
+.leftCol{
+    border-left: $outer-border
+}
+.rightCol{
+    border-right: $outer-border;
+}
 
+.action{
+    background-color: rgb(255, 231, 208);
+    flex-basis: 100%;
+    border: $inner-border;
+}
+.action:not(.action:first-child){
+    border-top: none;
+}
 
-
+li{
+    border-radius: 10px;
+}
 
 /******************************************
 /* STATE
