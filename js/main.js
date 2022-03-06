@@ -1,9 +1,12 @@
 /******************
 *****VARIABLES
 ******************/
-let globalTotal
-
-
+let globalTotal = ""
+let display = document.querySelector("#mainResult");
+let del = document.querySelector("#del");
+let numbers = document.querySelectorAll(".number");
+let specials = document.querySelectorAll(".special");
+let operators = document.querySelectorAll(".action");
 
 /******************
 *****FUNCTIONS
@@ -18,11 +21,11 @@ function subtract(minuend, subtrahend){
 }
 
 function multiply(num1, num2){
-    return num1 * num2
+    return num1 * num2;
 }
 
 function divide(dividend, divisor){
-    return dividend / divisor
+    return (divisor !== 0) ? dividend / divisor : "ERROR: can't divide by zero";
 }
 
 function operate(operator, total, numToApply){
@@ -41,3 +44,31 @@ function operate(operator, total, numToApply){
             break;
     }
 }
+
+
+del.addEventListener("click", () => {
+    
+})
+
+numbers.forEach(number => {
+    number.addEventListener("click", () => {
+        globalTotal += number.textContent;
+        display.value = globalTotal;
+    })
+})
+
+specials.forEach(special => {
+    special.addEventListener("click", () => {
+        if (special.)
+    })
+})
+
+function start(){
+    globalTotal = "";
+    display.value = globalTotal;
+    
+
+    
+}
+
+start()
