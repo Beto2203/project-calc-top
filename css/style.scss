@@ -90,7 +90,6 @@ body *{
     width: 100%;
     display: flex;
     margin: 100px auto 0;
-
     #mainResult{
         flex: 1;
         color: rgb(243, 243, 243);
@@ -98,6 +97,10 @@ body *{
         font-size: 100px;
         background-color: $display-bgr;
         border: 15px solid black;
+
+        &::placeholder{
+            color: rgb(243, 243, 243);
+        }        
     }
 }
 

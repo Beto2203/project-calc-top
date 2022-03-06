@@ -13,6 +13,7 @@ let del = document.querySelector("#del");
 let dot = document.querySelector("#dot");
 let equal = document.querySelector("#equal");
 let clear = document.querySelector("#clear");
+let inp = document.querySelector("body");
 let numbers = document.querySelectorAll(".number");
 let specials = document.querySelectorAll(".special");
 let operators = document.querySelectorAll(".action");
@@ -27,7 +28,9 @@ const displayTheTotal = (node) => {
     if (finished && !operatorActive) {
         start()
     }
+
     globalDisplay += node.textContent;
+
     if (currentOperator === "subtract"){
         display.value = "-" + globalDisplay;
     }
@@ -36,8 +39,6 @@ const displayTheTotal = (node) => {
     }
     
 }
-
-
 /******************
 *****FUNCTIONS
 ******************/
@@ -88,8 +89,7 @@ function operate(operator, total, numToApply){
     }
 }
 
-del.addEventListener("click", () => {
-    // This conditionals handle wether if the dot is the last character or the second-last to delete it
+function delEvent(){
     if (dotAlreadyUsed && globalDisplay.slice(-2, -1) === "."){
         dotAlreadyUsed = false;
         globalDisplay = globalDisplay.slice(0, -2);
@@ -108,9 +108,18 @@ del.addEventListener("click", () => {
     else{
         display.value = globalDisplay;
     }
-    
-})
+}
 
+function equalEvent(){
+    operatorActive = false;
+    if (currentOperator !== "0"){
+        operate(currentOperator, globalTotal, globalDisplay);
+        finished = true;
+    }
+}
+
+del.addEventListener("click", delEvent)
+    
 dot.addEventListener("click", () => {
    if (!dotAlreadyUsed){
     dotAlreadyUsed = true;
@@ -119,13 +128,7 @@ dot.addEventListener("click", () => {
    }
 })
 
-equal.addEventListener("click", () => {
-    operatorActive = false;
-    if (currentOperator !== "0"){
-        operate(currentOperator, globalTotal, globalDisplay);
-        finished = true;
-    }
-})
+equal.addEventListener("click", equalEvent)
 
 clear.addEventListener("click", () => {
     start();
@@ -161,6 +164,33 @@ operators.forEach(operator => {
         }
         currentOperator = operator.id
     })
+})
+
+inp.addEventListener("keydown", (e) => {
+    console.log(e.key);
+    if ("1234567890".includes(e.key)){
+        if (finished && !operatorActive) {
+            start()
+        }
+        globalDisplay += +e.key;
+        
+        if (currentOperator === "subtract"){
+            display.value = "-" + globalDisplay;
+        }
+        else{
+            display.value = globalDisplay;
+        }
+    }
+    else if (e.key === "Backspace"){
+        delEvent();
+    }
+    else if (e.key === "Enter"){
+        equalEvent();
+    }
+    else if(e.key === "+"){
+        EventTarget.dispatchEvent()
+    }
+    e.preventDefault();
 })
 
 function start(){

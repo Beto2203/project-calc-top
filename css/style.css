@@ -93,6 +93,9 @@ body * {
   background-color: #474056;
   border: 15px solid black;
 }
+#display #mainResult::placeholder {
+  color: #f3f3f3;
+}
 
 /******************************************
 /* MODULE
