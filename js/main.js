@@ -1,23 +1,41 @@
 /******************
 *****VARIABLES
 ******************/
+//Defined and declared variables
+let globalDisplay = "";
 let globalTotal = "";
 let dotAlreadyUsed = false;
+let operatorActive = false;
+let finished = false;
+let currentOperator = "0";
 let display = document.querySelector("#mainResult");
 let del = document.querySelector("#del");
 let dot = document.querySelector("#dot");
 let equal = document.querySelector("#equal");
+let clear = document.querySelector("#clear");
 let numbers = document.querySelectorAll(".number");
 let specials = document.querySelectorAll(".special");
 let operators = document.querySelectorAll(".action");
+
+//Only Defined variables
+let mainLoop;
 
 
 /******************
 *****ANONYMOUS FUNCTIONS
 ******************/
 const displayTheTotal = (node) => {
-    globalTotal += node.textContent;
-    display.value = globalTotal;
+    if (finished && !operatorActive) {
+        start()
+    }
+    globalDisplay += node.textContent;
+    if (currentOperator === "subtract"){
+        display.value = "-" + globalDisplay;
+    }
+    else{
+        display.value = globalDisplay;
+    }
+    
 }
 
 
@@ -25,22 +43,29 @@ const displayTheTotal = (node) => {
 *****FUNCTIONS
 ******************/
 function add(num1, num2){
-    return num1 + num2;
+    globalTotal = num1 + num2;
+    display.value = globalTotal;
 }
 
 function subtract(minuend, subtrahend){
-    return minuend - subtrahend;
+    globalTotal = minuend - subtrahend;
+    display.value = globalTotal;
+
 }
 
 function multiply(num1, num2){
-    return num1 * num2;
+    globalTotal = num1 * num2;
+    display.value = globalTotal;
 }
 
 function divide(dividend, divisor){
-    return (divisor !== 0) ? dividend / divisor : "ERROR: can't divide by zero";
+    globalTotal = (divisor !== 0) ? dividend / divisor : "ERROR: can't divide by zero";
+    display.value = globalTotal;
 }
 
 function operate(operator, total, numToApply){
+    total = +total;
+    numToApply = +numToApply;
     switch(operator){
         case "add" :
             add(total, numToApply);
@@ -57,28 +82,47 @@ function operate(operator, total, numToApply){
     }
 }
 
-
 del.addEventListener("click", () => {
-    if (dotAlreadyUsed && globalTotal.slice(-2,-1) === ".") {
+    // This conditionals handle wether if the dot is the last character or the second-last to delete it
+    if (dotAlreadyUsed && globalDisplay.slice(-2, -1) === "."){
         dotAlreadyUsed = false;
-        globalTotal = globalTotal.slice(0, -2);
-        console.log("First   " + globalTotal)
+        globalDisplay = globalDisplay.slice(0, -2);
+    }
+    else if (dotAlreadyUsed && globalDisplay.slice(-1) === ".") {
+        dotAlreadyUsed = false;
+        globalDisplay = globalDisplay.slice(0, -1);
     }
     else{
-        globalTotal = globalTotal.slice(0, -1);
-        console.log("Second   " + globalTotal);
+        globalDisplay = globalDisplay.slice(0, -1);
     }
-    display.value = globalTotal;
+    //These conditionals display a 0 if the globalDisplay is empty
+    if (globalDisplay == false){
+        display.value = globalDisplay + "0";
+    }
+    else{
+        display.value = globalDisplay;
+    }
+    
 })
 
 dot.addEventListener("click", () => {
+   if (!dotAlreadyUsed){
     dotAlreadyUsed = true;
-    globalTotal += ".";
-    display.value = globalTotal + "0";
+    globalDisplay += ".";
+    display.value = globalDisplay + "0";
+   }
 })
 
 equal.addEventListener("click", () => {
+    operatorActive = false;
+    if (currentOperator !== "0"){
+        operate(currentOperator, globalTotal, globalDisplay);
+        finished = true;
+    }
+})
 
+clear.addEventListener("click", () => {
+    start();
 })
 
 numbers.forEach(number => {
@@ -87,13 +131,40 @@ numbers.forEach(number => {
     })
 })
 
+operators.forEach(operator => {
+    operator.addEventListener("click", () => {
+        currentOperator = operator.id;
+        if (!operatorActive && globalTotal === ""){
+            operatorActive = true;
+            globalTotal = globalDisplay;
+            globalDisplay = ""
+            display.value = globalTotal;
+            console.log("1111111111111");
+        }
+        else if(!operatorActive){
+            operatorActive = true;
+            globalDisplay = ""
+            display.value = globalTotal;
+            console.log("22222222222222");
+        }
+        else{
+            operate(currentOperator, globalTotal, globalDisplay)
+            globalDisplay = ""
+            display.value = globalTotal;
+            console.log("3333333333333");
 
+        }
+    })
+})
 
 function start(){
+    globalDisplay = "";
     globalTotal = "";
     dotAlreadyUsed = false;
     display.value = "0";
-    
+    mainLoop = true;
+    currentOperator = "0";
+    finished = false;
 }
 
 //Calling the main function on page load
