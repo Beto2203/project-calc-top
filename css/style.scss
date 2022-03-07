@@ -97,6 +97,7 @@ body *{
         font-size: 100px;
         background-color: $display-bgr;
         border: 15px solid black;
+        caret-color: transparent;
 
         &::placeholder{
             color: rgb(243, 243, 243);

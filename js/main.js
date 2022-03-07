@@ -188,7 +188,16 @@ inp.addEventListener("keydown", (e) => {
         equalEvent();
     }
     else if(e.key === "+"){
-        EventTarget.dispatchEvent()
+        document.querySelector("#add").click();
+    }
+    else if(e.key === "-"){
+        document.querySelector("#subtract").click();
+    }
+    else if(e.key === "*"){
+        document.querySelector("#multiply").click();
+    }
+    else if(e.key === "/"){
+        document.querySelector("#divide").click();
     }
     e.preventDefault();
 })
