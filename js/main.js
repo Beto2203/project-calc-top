@@ -90,6 +90,9 @@ function operate(operator, total, numToApply){
 }
 
 function delEvent(){
+    if (finished){
+        return start();
+    }
     if (dotAlreadyUsed && globalDisplay.slice(-2, -1) === "."){
         dotAlreadyUsed = false;
         globalDisplay = globalDisplay.slice(0, -2);
